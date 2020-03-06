@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>CartView</title>
+</head>
+<body>
+	<h2>カート情報</h2>
+	<p th:if="${#lists.isEmpty(orderList)}">注文内容がありません。</p>
+	<table th:unless="${#lists.isEmpty(orderList)}" border="1">
+		<thead>
+			<tr>
+				<th>商品ID</th>
+				<th>商品名</th>
+				<th>価格</th>
+				<th>個数</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr th:each="order: ${orderList}">
+			<td th:text="${order.itemId}"></td>
+			<td th:text="${itemList.get(order.itemId).name}"></td>
+			<td th:text="${itemList.get(order.itemId).price}"></td>
+			<td th:text="${order.num}"></td>
+			<td>
+				<form th:action="@{/cart}" method="POST" th:object="${deleteForm}">
+					<input type="hidden" name="itemId" th:value="${order.itemId}" />
+					<input type="submit" value="削除" />
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">合計</td>
+			<td th:text="${totalPrice}"></td>
+		</tr>
+		</tbody>
+	</table>
+	<p><a th:href="@{/list}">商品一覧へ</a></p>
+</body>
+</html>

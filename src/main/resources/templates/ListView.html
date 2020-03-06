@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>ListView</title>
+</head>
+<body 	>
+	<h2>商品一覧</h2>
+	<p th:if="${#maps.isEmpty(itemList)}">商品がありません。</p>
+	<table th:unless="${#maps.isEmpty(itemList)}" border="1">
+		<thead>
+			<tr>
+				<th>商品ID</th>
+				<th>商品名</th>
+				<th>価格</th>
+				<th>注文個数</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr th:each="entry: ${itemList}">
+			<td th:text="${entry.item_id}"></td>
+			<td th:text="${entry.item_name}"></td>
+			<td th:text="${entry.price}"></td>
+			<td>
+				<form th:action="@{/list}" method="POST" th:object="${listForm}">
+					<input type="hidden" name="item_id" th:value="${entry.item_id}" />
+					<input type="number" name="item_name" min="1"/>
+					<input type="submit" value="カートに追加" />
+				</form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</body>
+</html>
