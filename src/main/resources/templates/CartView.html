@@ -20,7 +20,7 @@
 		<tbody>
 		<tr th:each="order: ${orderList}">
 			<td th:text="${order.itemId}"></td>
-			<td th:text="${itemList.get(order.itemId).name}"></td>
+			<td th:text="${itemList.get(order.itemId).item_name}"></td>
 			<td th:text="${itemList.get(order.itemId).price}"></td>
 			<td th:text="${order.num}"></td>
 			<td>

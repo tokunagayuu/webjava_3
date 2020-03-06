@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.systena.tigerscave.Work3.model.Cart;
@@ -166,6 +168,56 @@ public class ItemListController {
     }
 
     return cart;
+  }
+
+//  /**
+//   * 更新する(update)
+//   *
+//   * @param mav the mav
+//   * @return the model and view
+//   */
+//  @RequestMapping(value = "/update", method = RequestMethod.POST) // URLとのマッピング
+//  public ModelAndView update(ModelAndView mav, update update,BindingResult bindingResult) {
+//      List<Map<String, Object>> itemListMap = listService.getItemList();
+//	  if (itemListMap != null) {
+//	          //1行分の値でデータベースをUPDATEする
+//	          //item_idをキーに名称と価格を更新する
+//	          //SQL文字列中の「?」の部分に、後ろで指定した変数が埋め込まれる
+//	      	  int updateCount = jdbcTemplate.update(
+//	                  "UPDATE items SET item_name = ?, price = ? WHERE item_id = ?",
+//	                  update.getItemId(),
+//	                  Integer.parseInt(update.getItemPrice()),
+//	                  Integer.parseInt(update.getItemId()));
+//
+//	  }
+//	    mav.addObject("itemList", itemListMap);
+//
+//	    // Viewのテンプレート名を設定
+//	    mav.setViewName("ListView");
+//	    return mav;
+//
+//  }
+
+  /**
+   * 「削除」リンク押下時の処理
+   *
+   * パラメータで受け取ったアイテムIDのデータを削除する
+   *
+   * @param itemId
+   * @param model
+   * @return
+   */
+  @RequestMapping(value = "/deleteitem", method = RequestMethod.GET) // URLとのマッピング
+  public String update(@RequestParam(name = "item_id", required = true) String itemId,
+      Model model) {
+
+      // パラメータで受けとったアイテムIDのデータを削除する
+    // SQL文字列中の「?」の部分に、後ろで指定した変数が埋め込まれる
+    int deleteCount = jdbcTemplate.update("DELETE FROM items WHERE item_id = ?", Integer.parseInt(itemId));
+
+
+    return "redirect:/list";
+
   }
 
   /**

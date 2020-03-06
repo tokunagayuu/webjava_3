@@ -6,25 +6,20 @@ package jp.co.systena.tigerscave.Work3.model;
 public class Item {
 
   /** 商品ID */
-  private int itemId;
+  private String itemId;
 
   /** 商品名 */
   private String name;
 
   /** 価格 */
-  private int price;
+  private String price;
 
-  public Item(int itemId, String name, int price) {
-    this.itemId = itemId;
-    this.name = name;
-    this.price = price;
-  }
 
-  public int getItemId() {
+  public String getItemId() {
     return itemId;
   }
 
-  public void setItemId(int itemId) {
+  public void setItemId(String itemId) {
     this.itemId = itemId;
   }
 
@@ -36,11 +31,11 @@ public class Item {
     this.name = name;
   }
 
-  public int getPrice() {
+  public String getPrice() {
     return price;
   }
 
-  public void setPrice(int price) {
+  public void setPrice(String price) {
     this.price = price;
   }
 
