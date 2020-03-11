@@ -115,12 +115,22 @@ public class ItemListController {
     // 合計金額計算
     int totalPrice = 0;
     int iPrice = 0;
+    int array[] = new int[10];
     for (Order order : cart.getOrderList()) {
       System.out.println(order);
       iPrice = 0;
-      iPrice = Integer.parseInt(itemListMap.get(order.getItemId()).get("price").toString());
+      for (int i=0;i<itemListMap.size();i++) {
+    	  if(order.getItemId() == Integer.parseInt(itemListMap.get(i).get("item_id").toString())) {
+    		  iPrice = Integer.parseInt(itemListMap.get(i).get("price").toString());
+    		  array[order.getItemId()]=i;
+    		  break;
+    	  }
+
+      }
+
       totalPrice += iPrice  * order.getNum();
     }
+    mav.addObject("array",array);
     mav.addObject("totalPrice", totalPrice);
 
     // Viewのテンプレート名設定

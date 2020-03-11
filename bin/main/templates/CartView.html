@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  lang="ja">
 <head>
 <meta charset="UTF-8" />
 <title>CartView</title>
@@ -20,8 +20,8 @@
 		<tbody>
 		<tr th:each="order: ${orderList}">
 			<td th:text="${order.itemId}"></td>
-			<td th:text="${itemList.get(order.itemId).item_name}"></td>
-			<td th:text="${itemList.get(order.itemId).price}"></td>
+			<td th:text="${itemList.get(array[order.itemId]).item_name}"></td>
+			<td th:text="${itemList.get(array[order.itemId]).price}"></td>
 			<td th:text="${order.num}"></td>
 			<td>
 				<form th:action="@{/cart}" method="POST" th:object="${deleteForm}">
