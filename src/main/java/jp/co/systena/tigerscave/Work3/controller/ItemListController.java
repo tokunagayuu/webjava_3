@@ -123,12 +123,14 @@ public class ItemListController {
     	  if(order.getItemId() == Integer.parseInt(itemListMap.get(i).get("item_id").toString())) {
     		  iPrice = Integer.parseInt(itemListMap.get(i).get("price").toString());
     		  array[order.getItemId()]=i;
+    		  totalPrice += iPrice  * order.getNum();
     		  break;
+
     	  }
 
       }
 
-      totalPrice += iPrice  * order.getNum();
+
     }
     mav.addObject("array",array);
     mav.addObject("totalPrice", totalPrice);
