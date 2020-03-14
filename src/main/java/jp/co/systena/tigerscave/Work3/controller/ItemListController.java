@@ -115,7 +115,7 @@ public class ItemListController {
     // 合計金額計算
     int totalPrice = 0;
     int iPrice = 0;
-    int array[] = new int[10];
+    int array[] = new int[100001];
     for (Order order : cart.getOrderList()) {
       System.out.println(order);
       iPrice = 0;
